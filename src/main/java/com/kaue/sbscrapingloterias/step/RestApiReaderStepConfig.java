@@ -1,6 +1,7 @@
 package com.kaue.sbscrapingloterias.step;
 
 import org.springframework.batch.core.Step;
+import org.springframework.batch.core.StepExecutionListener;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.ItemReader;
@@ -13,8 +14,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 @Configuration
 public class RestApiReaderStepConfig {
 
-    public static final int CHUNK_SIZE = 1;
-    public static final int SKIP_LIMIT = 300;
+    public static final int CHUNK_SIZE = 5;
 
     @Bean
     public Step megaSenaStep(JobRepository jobRepository,
@@ -26,9 +26,6 @@ public class RestApiReaderStepConfig {
                 .chunk(CHUNK_SIZE, transactionManager)
                 .reader(megaSenaItemReader)
                 .writer(megaSenaItemWriter)
-                .faultTolerant()
-                .skip(Exception.class)
-                .skipLimit(SKIP_LIMIT)
                 .build();
     }
     @Bean
@@ -40,11 +37,14 @@ public class RestApiReaderStepConfig {
         return new StepBuilder("lotoFacilStep", jobRepository)
                 .chunk(CHUNK_SIZE, transactionManager)
                 .reader(lotoFacilItemReader)
+                .listener(StepExecutionListener.class)
                 .writer(lotoFacilItemlWriter)
-                .faultTolerant()
-                .skip(Exception.class)
-                .skipLimit(SKIP_LIMIT)
                 .build();
     }
+
+//    @AfterRead
+//    public void pegarLeve() throws InterruptedException {
+//        wait(3000L);
+//    }
 }
 
