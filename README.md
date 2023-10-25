@@ -29,8 +29,8 @@ Os arquivos com os retornos das requisições ser ao gerados ou atualizados no d
 
 ```
 user@MYPC:/mnt/c/sb-scraping-loterias/files$ ls -la
--rwxrwxrwx 1 kako kako 25241 Oct 25 14:41 'Resultados Lotofácil.json'
--rwxrwxrwx 1 kako kako 18253 Oct 25 14:41 'Resultados Mega Sena.json'
+-rwxrwxrwx 1 user user 25241 Oct 25 14:41 'Resultados Lotofácil.json'
+-rwxrwxrwx 1 user user 18253 Oct 25 14:41 'Resultados Mega Sena.json'
 ```
 
 
